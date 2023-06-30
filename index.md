@@ -44,7 +44,7 @@ spec:
       spec:
         containers:
         - name: my-container
-          image: nginx:latest
+          image: nginx:latest```
 
 ## Deployments
 - Summary: Deployments are a higher-level abstraction that manages ReplicaSets and provides declarative updates to pods and their replicas. They enable easy scaling, rolling updates, and rollbacks of application deployments.
