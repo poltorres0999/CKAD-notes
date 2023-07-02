@@ -17,6 +17,7 @@ spec:
   containers:
   - name: my-container
     image: nginx:latest
+
 ```
 
 ## ReplicaSets
