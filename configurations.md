@@ -313,4 +313,26 @@ Taints and tolerations provide a way to dedicate certain nodes for specific pods
         nodeSelector:
           <label_key>: <label_value>
     ```
+## Node Affinity
+Node affinity is a feature in Kubernetes that allows you to influence the scheduling of pods onto specific nodes based on node properties or labels. It provides fine-grained control over pod placement and enables you to define rules to ensure pods are scheduled on nodes that meet certain criteria.
 
+- Types of affinity:
+  - **RequiredDuringSchedulingIgnoredDuringExecution:** Ensures that pods are scheduled only on nodes that satisfy the specified rules.
+  - **PreferredDuringSchedulingIgnoredDuringExecution:** Allows the scheduler to prioritize scheduling pods on nodes that satisfy the specified rules, but it's not a hard requirement.
+  - **RequiredDuringSchedulingRequiredDuringExecution:** Ensures that pods are scheduled only on nodes that satisfy the specified rules and remains on those nodes during their entire lifecycle.
+  - **PreferredDuringSchedulingRequiredDuringExecution:** Allows the scheduler to prioritize scheduling pods on nodes that satisfy the specified rules and ensures that the pods remain on those nodes during their entire lifecycle, but it's not a hard requirement.
+
+- Commands:
+  - To specify node affinity in a pod specification:
+    ```yaml
+      spec:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: <label_key>
+                  operator: <label_operator>
+                  values:
+                  - <label_value>
+      ```
