@@ -180,3 +180,44 @@ A Service Account in Kubernetes is an identity that is used by Pods to authentic
           serviceAccountName: <service-account-name>
       ```
   - Grant additional RBAC roles to a Service Account: `kubectl create rolebinding <role-binding-name> --role=<role-name> --serviceaccount=<namespace>:<service-account-name>`
+
+## Resource Requirements
+
+In Kubernetes, you can specify the resource requirements (such as CPU and memory) for your Pods and Containers. These requirements help the Kubernetes scheduler make decisions about how to allocate resources across the cluster.
+
+- Summary
+
+  Resource requirements allow you to specify the amount of CPU and memory that each Pod or Container needs to run effectively. By setting resource limits and requests, you can ensure that Pods are scheduled appropriately and prevent resource contention issues within the cluster.
+
+- Use Cases
+
+  - Ensuring that Pods have sufficient resources to operate without performance degradation.
+  - Preventing individual Pods from consuming excessive resources and impacting the stability of other Pods.
+  - Facilitating efficient resource allocation across the cluster by allowing the scheduler to make informed placement decisions.
+  - 
+- Most Used Commands
+
+  - Set CPU resource limits and requests for a Pod or Container:
+    ```yaml
+    spec:
+      containers:
+      - name: my-container
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+    ```
+  - Set CPU resource limits and requests for a Pod or Container:
+  ```yaml
+  spec:
+    containers:
+    - name: my-container
+      resources:
+        limits:
+          memory: "2Gi"
+        requests:
+          memory: "1Gi"
+  ```
+  - View resource allocation and utilization of Pods: `kubectl top pods`
+  - View resource allocation and utilization of Nodes:: `kubectl top nodes`
