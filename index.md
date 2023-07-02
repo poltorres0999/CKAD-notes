@@ -92,3 +92,4 @@
   metadata:
     name: example-namespace
   ```
+  [Click here to view the configurations](configurations.md)
