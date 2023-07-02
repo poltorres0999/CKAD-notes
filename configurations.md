@@ -57,4 +57,69 @@
   - Create in imperative way: `kubectl create secret generic secret-name --from-literal=key=value`
   - Get information: `kubectl apply -f secret.yaml`
   - Get detailed information: `kubectl describe secret secret-name`
-      
+- Example YAML:
+  ```yaml
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: example-secret
+    type: Opaque
+    data:
+      username: dXNlcm5hbWU=  # Base64-encoded value
+      password: cGFzc3dvcmQ=  # Base64-encoded value
+  ```
+  - POD example with secrets using envFrom:
+    ```yaml
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: example-pod
+      spec:
+        containers:
+          - name: example-container
+            image: nginx:latest
+            envFrom:
+              - secretRef:
+                  name: example-secret
+    ```
+  - POD example with secrets using env:
+    ```yaml
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: example-pod
+      spec:
+        containers:
+          - name: example-container
+            image: nginx:latest
+            env:
+              - name: DB_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    name: example-secret
+                    key: username
+              - name: DB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: example-secret
+                    key: password
+    ```
+  - POD example using mounted volumes within the container:
+    ```yaml
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: example-pod
+      spec:
+        containers:
+          - name: example-container
+            image: nginx:latest
+            volumeMounts:
+              - name: secret-volume
+                mountPath: /etc/secrets
+                readOnly: true
+        volumes:
+          - name: secret-volume
+            secret:
+              secretName: example-secret
+    ```
