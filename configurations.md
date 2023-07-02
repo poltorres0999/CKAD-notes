@@ -221,3 +221,50 @@ In Kubernetes, you can specify the resource requirements (such as CPU and memory
   ```
   - View resource allocation and utilization of Pods: `kubectl top pods`
   - View resource allocation and utilization of Nodes:: `kubectl top nodes`
+### Limit Ranges and Resource Quotas
+#### Limit Ranges
+
+- Limit Ranges allow you to define default and maximum resource limits for a Kubernetes namespace.
+- They ensure that Pods created within the namespace adhere to the specified resource constraints.
+- By setting default limits and requests, Limit Ranges ensure that Pods have resource allocations even if not explicitly defined.
+- Limit Ranges promote fairness and stability by preventing individual Pods from consuming excessive resources.
+  
+- Limit Range Example:
+  ```yaml
+  apiVersion: v1
+  kind: LimitRange
+  metadata:
+    name: my-limit-range
+  spec:
+    limits:
+      - default:
+          cpu: "500m"
+          memory: "512Mi"
+        defaultRequest:
+          cpu: "100m"
+          memory: "256Mi"
+        type: Container
+  ```
+
+    This LimitRange configuration sets the default and maximum resource limits for Containers within a Kubernetes namespace. The default CPU limit is 500 milliCPU (0.5 CPU), the default memory limit is 512 megabytes (MiB), the default CPU request is 100 milliCPU (0.1 CPU), and the default memory request is 256 megabytes (MiB).
+
+#### Resource Quotas
+
+- Resource Quotas enable you to limit resource consumption within a Kubernetes namespace.
+- They set maximum limits for CPU, memory, storage, and other resources to prevent excessive usage.
+- Resource Quotas help manage resource allocation and prevent resource contention within a cluster.
+- They provide control and isolation at the namespace level, allowing for fair resource distribution among different projects or teams.
+
+- Resource Quota example:
+  ```yaml
+    apiVersion: v1
+    kind: ResourceQuota
+    metadata:
+      name: my-resource-quota
+    spec:
+      hard:
+        cpu: "2"
+        memory: 2Gi
+        pods: "10"
+  ```
+  In this example, the Resource Quota restricts the namespace to a maximum of 2 CPUs, 2Gi of memory, and 10 Pods.
