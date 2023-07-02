@@ -268,3 +268,49 @@ In Kubernetes, you can specify the resource requirements (such as CPU and memory
         pods: "10"
   ```
   In this example, the Resource Quota restricts the namespace to a maximum of 2 CPUs, 2Gi of memory, and 10 Pods.
+  
+## Taints and Tolerations
+
+Taints and Tolerations are used to control which pods can be scheduled on which nodes in a Kubernetes cluster.
+A taint is applied to a node, and it repels pods unless they have a matching toleration.
+Tolerations are specified in the pod specification and allow pods to tolerate specific taints on nodes.
+Taints and tolerations provide a way to dedicate certain nodes for specific pods or enforce specific node constraints.
+
+- Commands:
+  - To taint a node: `kubectl taint nodes <node_name> <taint_key>=<taint_value>:<taint_effect>`
+  - To view taints on nodes: `kubectl describe node <node_name>`
+  
+  -  To add a toleration to a pod specification:
+      ```yaml
+      Copy code
+      spec:
+        tolerations:
+          - key: <taint_key>
+            operator: <taint_operator>
+            value: <taint_value>
+            effect: <taint_effect>
+      ```
+## Node Selectors
+- Node Selectors allow you to schedule pods on nodes that match a set of predefined labels.
+- With node selectors, you can specify the label requirements in a pod's specification, ensuring it runs on the desired nodes.
+- Node selectors are useful when you have specific nodes in your cluster with certain capabilities or resources.
+
+- Commands:
+  - Specify a node selector in the pod specification using labels:
+    ```yaml
+    spec:
+    nodeSelector:
+      key: value
+    ```
+  - Add a label to a node: `kubectl label nodes <node_name> key=value`
+  - List nodes with a specific label: `kubectl get nodes -l key=value`
+  - List pods and the corresponding nodes that match specific labels:: `kubectl get pods -o wide --selector key=value`
+  - Add a node selector to an existing pod: `kubectl patch pod <pod_name> -p '{"spec": {"nodeSelector": {"key": "value"}}}'`
+  - Remove a node selector from an existing pod: `kubectl patch pod <pod_name> -p '{"spec": {"nodeSelector": null}}'`
+  - To specify a node selector in a pod specification:
+    ```yaml
+      spec:
+        nodeSelector:
+          <label_key>: <label_value>
+    ```
+
