@@ -8,17 +8,16 @@
   - Get information: `kubectl get pods`
   - Get detailed information: `kubectl describe pod pod-name`
 - Example YAML:
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: example-pod
-spec:
-  containers:
-  - name: my-container
-    image: nginx:latest
-
-```
+  ```yaml
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: example-pod
+  spec:
+    containers:
+    - name: my-container
+      image: nginx:latest
+  ```
 
 ## ReplicaSets
 - Summary: ReplicaSets ensure the desired number of pod replicas are running at all times. They provide high availability and scalability by automatically maintaining a specified number of identical pods.
