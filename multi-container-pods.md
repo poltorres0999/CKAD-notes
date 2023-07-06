@@ -51,6 +51,28 @@
   
   ### Init-Container Pattern
   
-  - While init-containers were mentioned earlier as part of the init-container pods, they can also be considered as a type of multi-container pattern.
-  - Init-containers are used to perform initialization tasks before the main container starts.
-  - They can prepare the environment, fetch configuration data, or populate shared volumes that the main container requires.
+  - Init-containers are specialized containers that run and complete before the main containers within a pod start.
+  - Init-containers are used to perform initialization tasks like pre-configuring files, waiting for external services to be available, or populating shared volumes.
+  - Init-containers run to completion, and once they finish, the main containers in the pod are started.
+  - The main purpose of init-containers is to prepare the environment or perform any necessary setup steps before the actual workload starts.
+  - Multiple init-containers can be defined in a pod, and they run in sequential order.
+  - Init-containers can share volumes with the main containers, allowing them to populate or modify shared data.
+    
+    **Init-Container Example**
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: init-container-pod
+    spec:
+      initContainers:
+        - name: init-container-1
+          image: init-container-1-image:latest
+        - name: init-container-2
+          image: init-container-2-image:latest
+      containers:
+        - name: main-container
+          image: main-container-image:latest
+          ports:
+            - containerPort: 8080
+      ```
