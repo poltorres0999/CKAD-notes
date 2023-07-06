@@ -20,5 +20,5 @@
 - [Multi-Container Pods](multi-container-pods.md)
 
 ## Observability
-- [Liveness Probes](observability.md#liveness probes)
-- [Readiness Probes](configurations.md#readiness probes)
+- [Liveness Probes](observability.md#liveness-probes)
+- [Readiness Probes](configurations.md#readiness-probes)
