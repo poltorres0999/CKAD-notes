@@ -21,4 +21,4 @@
 
 ## Observability
 - [Liveness Probes](observability.md#liveness-probes)
-- [Readiness Probes](configurations.md#readiness-probes)
+- [Readiness Probes](observability.md#readiness-probes)
