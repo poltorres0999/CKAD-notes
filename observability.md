@@ -24,6 +24,7 @@
           initialDelaySeconds: 15
           periodSeconds: 10
 ```
+In this example, the livenessProbe field is added to the container specification within the pod definition. It configures an HTTP GET probe to the /health endpoint on port 8080. The probe will start after an initial delay of 15 seconds and will be repeated every 10 seconds. If the probe fails, Kubernetes will restart the container.
 
 ## Readiness Probes
 - Readiness probes are used to determine if a container in a pod is ready to serve traffic.
@@ -51,3 +52,4 @@
             initialDelaySeconds: 10
             periodSeconds: 5
 ```
+In this example, the readinessProbe field is added to the container specification within the pod definition. It configures an HTTP GET probe to the /ready endpoint on port 8080. The probe will start after an initial delay of 10 seconds and will be repeated every 5 seconds. If the probe fails, the container is considered not ready to receive traffic.
