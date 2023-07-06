@@ -19,3 +19,13 @@
 ## Multi-Container Pods
 - [Multi-Container Pods](multi-container-pods.md)
 
+## Observability
+- [Liveness Probes](configurations.md#configmaps)
+- [Readiness Probes](configurations.md#secrets)
+- [Security Context](configurations.md#security-context)
+- [Service Account](configurations.md#service-account)
+- [Resource Requirements](configurations.md#resource-requirements)
+  - [Limit Ranges](configurations.md#limit-ranges)
+  - [Resource Quotas](configurations.md#resource-quotas)
+- [Taints and Tolerations](configurations.md#taints-and-tolerations)
+
