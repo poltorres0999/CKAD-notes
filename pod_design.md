@@ -102,3 +102,58 @@ The following example demonstrates the use of labels, selectors and annotations 
                       name: react-configmap
                       key: config-key
     ```
+## Rolling Updates and Rollbacks
+**Rolling Updates:**
+- **Definition**: Rolling updates in Kubernetes allow you to update your application or deployment to a new version without downtime. It follows a gradual and controlled approach, ensuring availability while transitioning to the updated version.
+- **Process**: Rolling updates involve creating new instances of the updated version, gradually scaling up while scaling down the instances of the previous version. This allows for a smooth transition without interrupting the running workload.
+- **Benefits**: Rolling updates provide the ability to update applications seamlessly, with features like zero-downtime deployments, automated rollbacks, and the ability to monitor the update progress.
+
+**Example**
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  annotations:
+    kubernetes.io/change-cause: "Updating to version v2"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: my-app:v2
+        ports:
+        - containerPort: 80
+  ```
+  **Explanation**
+  
+  - In this example, a deployment named my-app is defined with three replicas.
+  - The deployment specifies the updated version (my-app:v2) in the container's image field.
+  - The annotation kubernetes.io/change-cause is added to provide a description or reason for the update.
+  - During a rolling update, Kubernetes will create new pods with the updated version while scaling down the pods with the previous version gradually.
+    
+  **Rollout History**
+
+  - Kubernetes keeps a history of the deployment updates, including revision numbers and details.
+  - The ``kubectl rollout history`` command allows you to view the revision history of a deployment, providing information about when each revision was deployed and any associated annotations.
+    
+## Rollbacks
+
+- **Definition**: Rollbacks in Kubernetes refer to reverting to a previous version of an application or deployment when an update or new version encounters issues or failures.
+- **Process**: Kubernetes keeps track of the deployment history and allows you to rollback to a specific revision, which effectively scales down the new version and scales up the previous version.
+- **Benefits**: Rollbacks provide a safety net to quickly recover from failed updates or unexpected issues, ensuring the stability and availability of the application.
+
+**Example:**
+
+```shell
+kubectl rollout history deployment my-app
+kubectl rollout undo deployment my-app --to-revision=2
+```
