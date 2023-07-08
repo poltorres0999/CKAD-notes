@@ -25,3 +25,4 @@
 
 ## POD Design
 - [Labels, Selectors and Annotations](pod_design.md#labels-selectors-and-annotations)
+- [Rolling Updates and Rollbacks](pod_design.md#rolling-updates-and-rollbacks)
