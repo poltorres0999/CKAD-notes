@@ -22,3 +22,6 @@
 ## Observability
 - [Liveness Probes](observability.md#liveness-probes)
 - [Readiness Probes](observability.md#readiness-probes)
+
+## POD Design
+- [Labels, Selectors and Annotations](pod_design.md#labels-selectors-and-annotations)
