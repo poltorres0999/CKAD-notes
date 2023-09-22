@@ -3,6 +3,10 @@
 
 Kubernetes Services are a fundamental concept in Kubernetes networking that enable communication between various components within a Kubernetes cluster. They act as an abstraction layer that provides a stable and well-defined network endpoint (usually an IP address and port) for accessing one or more pods that are part of the service. Services play a critical role in facilitating load balancing, service discovery, and ensuring the reliability of applications running within the cluster.
 
+<p align="center">
+  <img src="images/kubernetes_service.png" alt="Kubernetes Service">
+</p>
+
 There are different types of Kubernetes Services:
 
 1. **ClusterIP**:
