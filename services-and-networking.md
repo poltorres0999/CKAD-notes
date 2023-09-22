@@ -23,7 +23,7 @@ There are different types of Kubernetes Services:
 
 In summary, Kubernetes Services abstract the complexities of networking within a cluster and provide a consistent way to access applications and services. The choice of service type depends on your specific use case, such as whether you need internal communication, external access, load balancing, or DNS-based service discovery. Understanding these service types is essential for effectively managing and deploying applications in Kubernetes.
 
-**Declarative Service Creation Examples**
+### Declarative Service Creation Examples
 
 **ClusterIP**
 
@@ -80,4 +80,24 @@ spec:
   type: ExternalName
   externalName: some.external.service.com
 ```
-
+### Imperative Service Creation Examples
+**ClusterIP**
+```bash
+kubectl create service clusterip my-clusterip-service --tcp=80:8080 --dry-run=client -o yaml | kubectl apply -f -
+```
+This command creates a ClusterIP Service named my-clusterip-service that exposes port 80 and targets port 8080. The --dry-run=client flag is used to preview the output in YAML format before applying it.
+**NodePort**
+```bash
+kubectl create service nodeport my-nodeport-service --tcp=80:8080 --node-port=30080 --dry-run=client -o yaml | kubectl apply -f -
+```
+This command creates a NodePort Service named my-nodeport-service that exposes port 80 on each node at port 30080 and targets port 8080. The --dry-run=client flag is used for a dry run before applying the configuration.
+**LoadBalancer**
+```bash
+kubectl create service loadbalancer my-lb-service --tcp=80:8080 --dry-run=client -o yaml | kubectl apply -f -
+```
+This command creates a LoadBalancer Service named my-lb-service that exposes port 80 and targets port 8080. Please note that LoadBalancer services require support from the underlying cloud infrastructure and might not be available in all environments.
+**ExternalName**
+```bash
+kubectl create service externalname my-externalname-service --external-name=example.com --dry-run=client -o yaml | kubectl apply -f -
+```
+This command creates an ExternalName Service named my-externalname-service that maps to the external DNS name example.com. It allows pods to access the external service by name.
