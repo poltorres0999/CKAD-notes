@@ -27,7 +27,9 @@
 - [Labels, Selectors and Annotations](pod_design.md#labels-selectors-and-annotations)
 - [Rolling Updates and Rollbacks](pod_design.md#rolling-updates-and-rollbacks)
   
-## Services & Networking
+## Services
 - [Services](services_and_networking.md#services)
-- Ingress Networking
-- Network Policies
+
+## Services
+- [Network Policies](networking.md#network-policies)
+
