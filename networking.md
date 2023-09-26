@@ -23,10 +23,6 @@ Network policies are a Kubernetes resource used to control and manage network tr
 - Rules are matched in order, top to bottom.
 - First matching rule is applied; subsequent rules are ignored.
 
-### Default Deny
-- Without Network Policies, Kubernetes enforces default-deny.
-- All pod-to-pod communication is blocked unless explicitly allowed.
-
 ### Policy Types
 - Two types: `ClusterNetworkPolicy` and `NetworkPolicy`.
 - CKAD focuses on `NetworkPolicy`.
