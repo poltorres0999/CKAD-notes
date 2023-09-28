@@ -30,6 +30,9 @@
 ## Services
 - [Services](services_and_networking.md#services)
 
-## Services
+## Networking
 - [Network Policies](networking.md#network-policies)
+
+## Storage
+- [Storage Persistence](storage.md#storage-persistence)
 
